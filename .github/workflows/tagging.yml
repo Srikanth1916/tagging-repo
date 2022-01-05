@@ -36,7 +36,7 @@ jobs:
          git fetch --unshallow --tags
          git tag -l > tag1
          echo ${{ github.ref }} | awk -F '/' '{print $3}' > tag2
-         C=`cat file2`
+         C=`cat tag2`
          if grep $C tag1
          then
            echo "Latest tag is found and good to proceed with the next steps"
