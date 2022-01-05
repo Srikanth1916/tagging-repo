@@ -20,7 +20,7 @@ jobs:
 
     - name: Check commit 
       run: |
-          if [[ ${{ github.event.base_ref }} = refs/heads/main ]]; then
+          if [[ ${{ github.event.base_ref }} = "refs/heads/main" ]]; then
               echo "Match found As it is commited from main branch"
           else
                echo "commited from another branch"
