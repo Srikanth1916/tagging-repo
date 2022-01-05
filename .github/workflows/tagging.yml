@@ -1,0 +1,45 @@
+name: 'tagging'
+
+on:
+  create:
+    tags:
+      - "v[0-9].[0-9]+.[0-9]+"
+
+jobs:
+  testing:
+    name: 'testing process'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    - name: git repo Checkout
+      uses: actions/checkout@v2
+   
+
+    - name: Check commit 
+      run: |
+          if [[ ${{ github.event.base_ref }} = refs/heads/main ]]; then
+              echo "Match found As it is commited from main branch"
+          else
+               echo "commited from another branch"
+          exit 1
+          fi
+
+    - name: checking whether the latest tag are valid or not
+      run: | 
+         git fetch --unshallow --tags
+         git tag -l > tag1
+         echo ${{ github.ref }} | awk -F '/' '{print $3}' > tag2
+         C=`cat file2`
+         if grep $C tag1
+         then
+           echo "Latest tag is found and good to proceed with the next steps"
+         else
+           echo "Latest tag  not found"
+         exit 1
+         fi
+
+    - name: Setup Java JDK
+      uses: actions/setup-java@v2
