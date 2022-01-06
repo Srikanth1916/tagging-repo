@@ -16,7 +16,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           release_branches: main
-		  tag_prefix: v
+          tag_prefix: v
           create_annotated_tag: false
           fetch_all_tags: false
           dry_run: false
